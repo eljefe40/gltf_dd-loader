@@ -42695,9 +42695,12 @@ function () {
         this.defaultCamera.lookAt(new _three.Vector3());
       } else {
         this.defaultCamera.position.copy(center);
-        this.defaultCamera.position.x += size / 2.0;
-        this.defaultCamera.position.y += size / 5.0;
-        this.defaultCamera.position.z += size / 2.0;
+        this.defaultCamera.position.x = 0;
+        this.defaultCamera.position.y = 0;
+        this.defaultCamera.position.z += size / 1.0; // this.defaultCamera.position.x += size / 2.0;
+        // this.defaultCamera.position.y += size / 5.0;
+        // this.defaultCamera.position.z += size / 2.0;
+
         this.defaultCamera.lookAt(center);
       }
 

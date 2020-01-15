@@ -119,11 +119,7 @@ export class Viewer {
     this.controls.autoRotate = false;
     this.controls.autoRotateSpeed = -10;
     this.controls.screenSpacePanning = true;
-
-
-
     this.el.appendChild(this.renderer.domElement);
-
     this.cameraCtrl = null;
     this.cameraFolder = null;
     this.animFolder = null;
@@ -144,28 +140,23 @@ export class Viewer {
   }
 
   animate (time) {
-
     requestAnimationFrame( this.animate );
-
     const dt = (time - this.prevTime) / 1000;
-
     this.controls.update();
     this.stats.update();
     this.mixer && this.mixer.update(dt);
     this.render();
-
     this.prevTime = time;
-
   }
 
   render () {
 
     this.renderer.render( this.scene, this.activeCamera );
-    if (this.state.grid) {
-      this.axesCamera.position.copy(this.defaultCamera.position)
-      this.axesCamera.lookAt(this.axesScene.position)
-      this.axesRenderer.render( this.axesScene, this.axesCamera );
-    }
+    // if (this.state.grid) {
+    //   this.axesCamera.position.copy(this.defaultCamera.position)
+    //   this.axesCamera.lookAt(this.axesScene.position)
+    //   this.axesRenderer.render( this.axesScene, this.axesCamera );
+    // }
   }
 
   resize () {
@@ -242,15 +233,11 @@ export class Viewer {
    * @param {Array<THREE.AnimationClip} clips
    */
   setContent ( object, clips ) {
-
     this.clear();
-
     const box = new Box3().setFromObject(object);
     const size = box.getSize(new Vector3()).length();
     const center = box.getCenter(new Vector3());
-
     this.controls.reset();
-
     object.position.x += (object.position.x - center.x);
     object.position.y += (object.position.y - center.y);
     object.position.z += (object.position.z - center.z);
@@ -260,40 +247,26 @@ export class Viewer {
     this.defaultCamera.updateProjectionMatrix();
 
     if (this.options.cameraPosition) {
-
       this.defaultCamera.position.fromArray( this.options.cameraPosition );
       this.defaultCamera.lookAt( new Vector3() );
-
     } else {
-
       this.defaultCamera.position.copy(center);
-
       this.defaultCamera.position.x =0;
       this.defaultCamera.position.y =0;
       this.defaultCamera.position.z += size / 1.0;
-
-      // this.defaultCamera.position.x += size / 2.0;
-      // this.defaultCamera.position.y += size / 5.0;
-      // this.defaultCamera.position.z += size / 2.0;
-
       this.defaultCamera.lookAt(center);
-
     }
 
     this.setCamera(DEFAULT_CAMERA);
-
     this.axesCamera.position.copy(this.defaultCamera.position)
     this.axesCamera.lookAt(this.axesScene.position)
     this.axesCamera.near = size / 100;
     this.axesCamera.far = size * 100;
     this.axesCamera.updateProjectionMatrix();
     this.axesCorner.scale.set(size, size, size);
-
     this.controls.saveState();
-
     this.scene.add(object);
     this.content = object;
-
     this.state.addLights = true;
 
     this.content.traverse((node) => {
@@ -306,7 +279,6 @@ export class Viewer {
     });
 
     this.setClips(clips);
-
     this.updateLights();
     this.updateGUI();
     this.updateEnvironment();
@@ -320,11 +292,9 @@ export class Viewer {
   }
 
   printGraph (node) {
-
     console.group(' <' + node.type + '> ' + node.name);
     node.children.forEach((child) => this.printGraph(child));
     console.groupEnd();
-
   }
 
   /**

@@ -4,15 +4,9 @@ import { ValidationController } from './validation-controller.js';
 import queryString from 'query-string';
 
 class App {
-
-  /**
-   * @param  {Element} el
-   * @param  {Location} location
-   */
   constructor (el, location) {
     const hash = location.hash ? queryString.parse(location.hash) : {};
     this.options = {
-      // kiosk: Boolean(hash.kiosk),
       model: hash.model || '',
       preset: hash.preset || '',
       cameraPosition: hash.cameraPosition
@@ -72,11 +66,9 @@ class App {
         rootPath = path.replace(file.name, '');
       }
     });
-
     if (!rootFile) {
       this.onError('No .gltf or .glb asset found.');
     }
-
     this.view(rootFile, rootPath, fileMap);
   }
 
@@ -125,11 +117,13 @@ class App {
   }
 
   showSpinner () {
-    this.spinnerEl.style.display = '';
+    console.log('show Spinner');
+   // this.spinnerEl.style.display = '';
   }
 
   hideSpinner () {
-    this.spinnerEl.style.display = 'none';
+    console.log('hide Spinner');
+    //this.spinnerEl.style.display = 'none';
   }
 }
 

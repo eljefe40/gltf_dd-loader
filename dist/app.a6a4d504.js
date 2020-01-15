@@ -42604,13 +42604,11 @@ function () {
   }, {
     key: "render",
     value: function render() {
-      this.renderer.render(this.scene, this.activeCamera);
-
-      if (this.state.grid) {
-        this.axesCamera.position.copy(this.defaultCamera.position);
-        this.axesCamera.lookAt(this.axesScene.position);
-        this.axesRenderer.render(this.axesScene, this.axesCamera);
-      }
+      this.renderer.render(this.scene, this.activeCamera); // if (this.state.grid) {
+      //   this.axesCamera.position.copy(this.defaultCamera.position)
+      //   this.axesCamera.lookAt(this.axesScene.position)
+      //   this.axesRenderer.render( this.axesScene, this.axesCamera );
+      // }
     }
   }, {
     key: "resize",
@@ -42697,10 +42695,7 @@ function () {
         this.defaultCamera.position.copy(center);
         this.defaultCamera.position.x = 0;
         this.defaultCamera.position.y = 0;
-        this.defaultCamera.position.z += size / 1.0; // this.defaultCamera.position.x += size / 2.0;
-        // this.defaultCamera.position.y += size / 5.0;
-        // this.defaultCamera.position.z += size / 2.0;
-
+        this.defaultCamera.position.z += size / 1.0;
         this.defaultCamera.lookAt(center);
       }
 
@@ -64724,8 +64719,7 @@ function () {
         reportError: e,
         level: 0
       });
-      this.showToggle();
-      this.bindListeners();
+      this.showToggle(); // this.bindListeners();
     }
   }, {
     key: "bindListeners",
@@ -65095,16 +65089,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 var App =
 /*#__PURE__*/
 function () {
-  /**
-   * @param  {Element} el
-   * @param  {Location} location
-   */
   function App(el, location) {
     _classCallCheck(this, App);
 
     var hash = location.hash ? _queryString.default.parse(location.hash) : {};
     this.options = {
-      // kiosk: Boolean(hash.kiosk),
       model: hash.model || '',
       preset: hash.preset || '',
       cameraPosition: hash.cameraPosition ? hash.cameraPosition.split(',').map(Number) : null
@@ -65243,12 +65232,12 @@ function () {
   }, {
     key: "showSpinner",
     value: function showSpinner() {
-      this.spinnerEl.style.display = '';
+      console.log('show Spinner'); // this.spinnerEl.style.display = '';
     }
   }, {
     key: "hideSpinner",
     value: function hideSpinner() {
-      this.spinnerEl.style.display = 'none';
+      console.log('hide Spinner'); //this.spinnerEl.style.display = 'none';
     }
   }]);
 
